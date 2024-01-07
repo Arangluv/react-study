@@ -1,14 +1,13 @@
-import { useState } from "react";
-import Children from "./Children";
+import React, { useState, useEffect, Suspense } from "react";
+import { useGetDataQuery } from "./hooks/dataHook";
 
 export default function Parent() {
-  const [parent, setPanrent] = useState(0);
-  console.log("부모 렌더링");
-  return (
-    <div>
-      <span>{`부모 번호 : ${parent}`}</span>
-      <button onClick={() => setPanrent((pre) => pre + 1)}>부모</button>
-      <Children parentNum={parent} temp="하하하"></Children>
-    </div>
-  );
+  const { data, isLoading, isError, error } = useGetDataQuery();
+  console.log("data");
+  console.log(data);
+  console.log("isError");
+  console.log(isError);
+  console.log("error");
+  console.log(error);
+  return <div>{"asd"}</div>;
 }
