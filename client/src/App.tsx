@@ -10,25 +10,23 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ErrorBoundaryAndSuspense from "./components/ErrorBoundaryAndSuspense";
-const Parent = lazy(() => import("./Parent"));
+// import Parent from "./Parent";
 function App() {
+  console.log("App 렌더링!");
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        retry: false,
+        retry: 0,
         refetchOnWindowFocus: false,
+        refetchOnMount: false,
         throwOnError: true,
-        gcTime: 50000,
       },
     },
   });
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* fallback은 Component도 argument로 받을 수 있다 */}
-      <ErrorBoundaryAndSuspense>
-        <Parent></Parent>
-      </ErrorBoundaryAndSuspense>
+      <ErrorBoundaryAndSuspense></ErrorBoundaryAndSuspense>
       <ToastContainer limit={1} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
